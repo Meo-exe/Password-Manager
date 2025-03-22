@@ -1,0 +1,47 @@
+1. The modules to import were quite basic for this project. Basically only needed to get tkinter since it is the basis
+of the UI and finally importing the random module since it will be used to generate random passwords.
+
+2. First step for the actual project was to make the ui. The biggest challenge here was while using the grid system and
+making sure that the alignment would make sense since some of our entries were longer than a single column. To remedy that
+issue, I made use of the "columnspan" to make each widget fit in multiple rows. Each of the widgets had different uses
+and therefore made use of different functionalities of TKinter. Since the email is often reused the default entry was
+set up using the ".insert". A little hiccup occurred while setting it up since I forgot to specify the INDEX (just read
+the documentation).
+
+3. Giving actual functionality to the buttons was the next step. There were two buttons with two functionalities. The
+generate password required a function that would create the password (just reused the code from lesson 5) and used the
+.insert method to put the password into the "password_entry". Next was giving functionality to the "Add" button, which
+serves the purpose of saving our entries to a .txt file anf formating it for readability. To do so, a save_password()
+function was created. Added a line of code that would ensure that all entry fields were cleared after the add button was used.
+
+4. The main difficulty with this project was dealing with some alignment issues. I'm not quite sure what causes the issues
+since even when running Angela's solution I still run in the exact same issue as the one with my code. There may be some
+sort of compatibility issue between mac and windows?
+
+##---------------------------------------------2nd part of the project -----------------------------------------------##
+
+1. For the 2nd part of the project, I added some extra functionality. Mainly changing the type of file in which the
+passwords were stored from a .txt to a .json file so that they can be accessed easier. This means that we can create a
+function that will search the .json file to try and find any account information created for previously used websites.
+This required one new module, json.
+
+2. First it was needed to change the save_password() function since it would now be writing to a .json file rather than
+a .txt. .Json files are accessed differently than .txt files which means that we can access the data inside of it.
+first we load in the file's data and attach it to a variable using .load(). We can then update the data with .update and
+finally we save the new data using .dump(data, file).
+
+3. Important was also to make sure that the program is accounting for any possible errors such as the .json file not existing
+in which case we create the .json file than write to it. I STILL CURRENTLY HAVE AN ERROR OCCURRING WHENEVER I INTERACT
+WITH THE JSON FILE AND IT EXISTS BUT IS EMPTY.
+
+4. Last was to create a function to access previously saved passwords. This is where the utility of .json comes into play.
+The .json file is saved as a nested dictionary, which means that the stored information can be accessed by using keys. In
+this case we access the nested "website" dictionary using the "website" as a key.
+
+
+Main Takeaways:
+
+Making use of exceptions helps a lot with event driven applications like this since it will not crash the whole application
+when something stops working, it'll simply reset the user to a point where they can enter valid input. Try to see the "try/except"
+as a sort of exceptional "if/else". try (failure point) --> except (what will cause the failure and the response to it)
+--> else (what you do when there is no exception)
